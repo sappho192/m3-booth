@@ -1,0 +1,27 @@
+---
+import { album } from "../config/album";
+
+interface Props {
+	artworkSrc?: string;
+}
+
+const { artworkSrc } = Astro.props;
+---
+
+<section class="hero">
+	<p class="hero__artist reveal">{album.artist}</p>
+	<h1 class="hero__title reveal" style="--reveal-delay: 0.15s">{album.title}</h1>
+	<p class="hero__event reveal" style="--reveal-delay: 0.3s">{album.event} — {album.date}</p>
+	{album.subtitle && <p class="hero__event reveal" style="--reveal-delay: 0.4s">{album.subtitle}</p>}
+	{
+		artworkSrc && (
+			<div class="hero__artwork reveal" style="--reveal-delay: 0.45s">
+				<img src={artworkSrc} alt={`${album.title} album artwork`} loading="lazy" />
+			</div>
+		)
+	}
+	<div class="hero__scroll reveal" style="--reveal-delay: 0.6s" aria-hidden="true">
+		<span class="label">Scroll</span>
+		<span class="hero__scroll-line"></span>
+	</div>
+</section>

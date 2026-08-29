@@ -1,0 +1,17 @@
+---
+import { album } from "../config/album";
+---
+
+<div class="entrance" id="entrance">
+	<p class="entrance__brand">{album.artist}</p>
+	<p class="entrance__tagline">{album.title} / {album.event}</p>
+	<div class="entrance__actions">
+		<button type="button" class="entrance__button entrance__button--sound" id="enter-sound">
+			♪ Enter with Sound
+		</button>
+		<button type="button" class="entrance__button entrance__button--silent" id="enter-silent">
+			Enter Silently
+		</button>
+		<p class="entrance__status" id="entrance-status" role="status" aria-live="polite"></p>
+	</div>
+</div>

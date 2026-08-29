@@ -1,0 +1,26 @@
+---
+import { album } from "../config/album";
+
+const info = [
+	{ label: "Event", value: album.eventInfo.event },
+	{ label: "Date", value: album.eventInfo.date },
+	{ label: "Venue", value: album.eventInfo.venue },
+	{ label: "Booth", value: album.eventInfo.booth },
+	{ label: "Price", value: album.eventInfo.price },
+	{ label: "Format", value: album.eventInfo.format },
+];
+---
+
+<section id="event">
+	<h2>M3 Information</h2>
+	<ul class="info-list">
+		{
+			info.map((item) => (
+				<li>
+					<span class="label">{item.label}</span>
+					<span>{item.value}</span>
+				</li>
+			))
+		}
+	</ul>
+</section>

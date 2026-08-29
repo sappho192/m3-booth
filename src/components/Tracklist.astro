@@ -1,0 +1,17 @@
+---
+import { album } from "../config/album";
+---
+
+<section id="tracklist">
+	<h2>Tracklist</h2>
+	<ol class="tracklist">
+		{
+			album.tracks.map((track) => (
+				<li>
+					<span>{track.title}</span>
+					<span class="tracklist__note">{track.note}</span>
+				</li>
+			))
+		}
+	</ol>
+</section>
