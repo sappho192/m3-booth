@@ -4,7 +4,7 @@
  */
 export const album = {
 	artist: "Sappho Sound",
-	title: "NEW ALBUM",
+	title: "[To be disclosed]",
 	subtitle: "",
 	event: "M3 2026 Autumn",
 	date: "2026-10-25",
@@ -24,18 +24,33 @@ export const album = {
 
 	audio: {
 		/**
-		 * Sample-aligned stems (all exactly 97.567458s, 48kHz Opus).
+		 * Sample-aligned stems (48kHz, ~97.56s each). Base paths only —
+		 * the engine appends the first decodable extension from
+		 * `formats` (Opus for modern browsers, AAC/m4a for old iOS
+		 * Safari where decodeAudioData can't handle Ogg Opus).
+		 *
 		 * Arrangement build: inst plays alone from the loop start;
 		 * bass + pluck fade in from `buildStartBar` (0-based, ≈15.61s)
 		 * over `buildBars` bars. Afterwards all three loop at full gain.
 		 */
-		stems: {
-			inst: "/music/260823_inst.opus",
-			bass: "/music/260823_bass.opus",
-			pluck: "/music/260823_pluck_osti.opus",
+		stemBase: {
+			inst: "/music/260823_inst",
+			bass: "/music/260823_bass",
+			pluck: "/music/260823_pluck_osti",
 		},
+		formats: ["opus", "m4a"],
 		buildStartBar: 8,
+		/** bass/pluck fade-in length (bars), from buildStartBar. */
 		buildBars: 1,
+		/**
+		 * Entrance tension on top of the inst-only arrangement: the whole
+		 * mix runs through a lowpass at reduced gain until the build,
+		 * where the filter opens and full gain returns. This brightening
+		 * is deliberately slower than the stem fade-in (`buildBars`).
+		 */
+		releaseRampBars: 4,
+		entranceLowpassHz: 450,
+		entranceGain: 0.7,
 	},
 
 	concept: [
@@ -44,28 +59,29 @@ export const album = {
 	],
 
 	tracks: [
-		{ title: "Track 01", note: "TBA" },
-		{ title: "Track 02", note: "TBA" },
-		{ title: "Track 03", note: "TBA" },
-		{ title: "Track 04", note: "TBA" },
+		"Sappho - Metropolitan Hills",
+		"Sappho feat. まより - [To be disclosed]",
+		"Sappho - [To be disclosed]",
+		"Sappho - [To be disclosed]",
+		"Sappho - [To be disclosed]",
+		"Sappho - [To be disclosed]",
 	],
 
 	eventInfo: {
 		date: "2026-10-25",
 		event: "M3 2026 Autumn",
-		venue: "TBA",
-		booth: "TBA",
-		price: "TBA",
-		format: "TBA",
+		venue: "東京流通センター(TRC) 第一展示場",
+		booth: "G-21a",
+		price: "[To be disclosed]",
+		format: "CD",
 	},
 
 	credits: [
-		{ role: "Composition", name: "Sappho Sound" },
-		{ role: "Arrangement", name: "Sappho Sound" },
-		{ role: "Mixing", name: "TBA" },
-		{ role: "Mastering", name: "TBA" },
-		{ role: "Illustration", name: "TBA" },
-		{ role: "Design", name: "Sappho Sound" },
+		{ role: "Composition", name: "Sappho" },
+		{ role: "Arrangement", name: "Sappho" },
+		{ role: "Vocal", name: "まより" },
+		{ role: "Illustration", name: "[To be disclosed]" },
+		{ role: "Special thanks to", name: "紅葉月城、Avery Berman" },
 	],
 
 	/** Only confirmed links are rendered. */

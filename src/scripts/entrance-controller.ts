@@ -46,6 +46,7 @@ class EntranceController {
 	private setTimingVariables(): void {
 		const bar = (60 / album.bpm) * album.beatsPerBar;
 		const root = document.documentElement.style;
+		root.setProperty("--bar-s", `${bar.toFixed(3)}s`);
 		root.setProperty("--pulse-s", `${(bar * album.visualPulseBars).toFixed(3)}s`);
 		// The visual release lasts exactly as long as the audio build, so
 		// the fade-in and the Hero completion read as one event.

@@ -201,13 +201,12 @@ body[data-state="entering"] .reveal {
 
 .tracklist li {
 	display: flex;
-	justify-content: space-between;
-	gap: 1.5rem;
+	gap: 1.25rem;
 	padding: 0.85rem 0;
 	border-bottom: 1px solid rgba(245, 239, 231, 0.12);
 }
 
-.tracklist__note {
+.tracklist__num {
 	color: var(--ink-faint);
 	font-size: 0.85rem;
 }

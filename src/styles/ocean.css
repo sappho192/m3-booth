@@ -9,7 +9,57 @@
 	inset: 0;
 	z-index: -2;
 	overflow: hidden;
-	background: var(--deep-sea);
+	/* The first screen is near-black; layers fade in one by one on entry. */
+	background: #06090d;
+}
+
+/*
+ * Layer fade wrappers. Hidden until entry begins; during
+ * `entrance-playing` each layer fades in on a bar-locked stagger, so
+ * the scene assembles itself while the inst-only tension plays.
+ * Silent entry skips the stagger (default 1.2s transition, no delay).
+ */
+.ocean__layer {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 1.2s ease;
+}
+
+body[data-state="entrance-playing"] .ocean__layer,
+body[data-state="entering"] .ocean__layer,
+body[data-state="main"] .ocean__layer {
+	opacity: 1;
+}
+
+body[data-state="entrance-playing"] .ocean__layer--sky {
+	transition-duration: calc(var(--bar-s, 1.95s) * 6);
+	transition-delay: 0s;
+}
+
+body[data-state="entrance-playing"] .ocean__layer--sea {
+	transition-duration: calc(var(--bar-s, 1.95s) * 6);
+	transition-delay: calc(var(--bar-s, 1.95s) * 1.5);
+}
+
+body[data-state="entrance-playing"] .ocean__layer--horizon {
+	transition-duration: calc(var(--bar-s, 1.95s) * 4.5);
+	transition-delay: calc(var(--bar-s, 1.95s) * 3);
+}
+
+body[data-state="entrance-playing"] .ocean__layer--shimmer {
+	transition-duration: calc(var(--bar-s, 1.95s) * 6);
+	transition-delay: calc(var(--bar-s, 1.95s) * 4);
+}
+
+body[data-state="entrance-playing"] .ocean__layer--wind {
+	transition-duration: calc(var(--bar-s, 1.95s) * 4.5);
+	transition-delay: calc(var(--bar-s, 1.95s) * 5);
+}
+
+body[data-state="entrance-playing"] .ocean__layer--grain {
+	transition-duration: calc(var(--bar-s, 1.95s) * 4.5);
+	transition-delay: calc(var(--bar-s, 1.95s) * 6);
 }
 
 /* ---------- Sky ---------- */

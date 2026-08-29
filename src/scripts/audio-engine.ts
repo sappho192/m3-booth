@@ -1,7 +1,12 @@
 import { album } from "../config/album";
 
-type StemName = keyof typeof album.audio.stems;
-const STEM_NAMES = Object.keys(album.audio.stems) as StemName[];
+type StemName = keyof typeof album.audio.stemBase;
+const STEM_NAMES = Object.keys(album.audio.stemBase) as StemName[];
+
+const FORMAT_MIME: Record<string, string> = {
+	opus: 'audio/ogg; codecs="opus"',
+	m4a: 'audio/mp4; codecs="mp4a.40.2"',
+};
 
 /**
  * AudioEngine — owns the AudioContext, stem loading and musical timing.
@@ -18,8 +23,11 @@ export class AudioEngine {
 	private ctx: AudioContext | null = null;
 	private buffers = new Map<StemName, AudioBuffer>();
 	private fetchPromises = new Map<StemName, Promise<ArrayBuffer>>();
+	private format: string | null = null;
 
 	private gains = new Map<StemName, GainNode>();
+	private mixBus: GainNode | null = null;
+	private filter: BiquadFilterNode | null = null;
 	private masterGain: GainNode | null = null;
 
 	/** AudioContext time at which the current loop pass started. */
@@ -57,13 +65,35 @@ export class AudioEngine {
 		return this.ctx;
 	}
 
+	/**
+	 * Pick the first container/codec the browser can decode. Ogg Opus
+	 * wins where supported; old iOS Safari (< 18.4) can't decode it and
+	 * falls through to AAC/m4a.
+	 *
+	 * Debug override: `?format=m4a` (or `opus`) forces a format, e.g. to
+	 * test the fallback path in Chrome.
+	 */
+	private pickFormat(): string {
+		const forced = new URLSearchParams(location.search).get("format");
+		if (forced && (album.audio.formats as readonly string[]).includes(forced)) {
+			console.info(`Audio format forced by query param: ${forced}`);
+			return forced;
+		}
+		const probe = document.createElement("audio");
+		for (const fmt of album.audio.formats) {
+			if (probe.canPlayType(FORMAT_MIME[fmt] ?? fmt) !== "") return fmt;
+		}
+		return album.audio.formats[album.audio.formats.length - 1];
+	}
+
 	/** Start fetching all stems ahead of time (idle prefetch). No decode yet. */
 	prefetch(): void {
+		if (!this.format) this.format = this.pickFormat();
 		for (const name of STEM_NAMES) {
 			if (!this.fetchPromises.has(name)) {
 				this.fetchPromises.set(
 					name,
-					fetch(album.audio.stems[name]).then((res) => {
+					fetch(`${album.audio.stemBase[name]}.${this.format}`).then((res) => {
 						if (!res.ok) throw new Error(`Stem "${name}" fetch failed: ${res.status}`);
 						return res.arrayBuffer();
 					}),
@@ -72,15 +102,37 @@ export class AudioEngine {
 		}
 	}
 
+	/**
+	 * Fetch + decode every stem. If decode fails (canPlayType is
+	 * occasionally optimistic), drop everything and retry with the next
+	 * format in the list.
+	 */
 	async load(): Promise<void> {
 		const ctx = this.ensureContext();
-		this.prefetch();
-		await Promise.all(
-			STEM_NAMES.map(async (name) => {
-				const data = await this.fetchPromises.get(name)!;
-				this.buffers.set(name, await ctx.decodeAudioData(data));
-			}),
-		);
+		if (!this.format) this.format = this.pickFormat();
+		const formats = album.audio.formats;
+
+		for (let i = formats.indexOf(this.format); i < formats.length; i++) {
+			if (this.format !== formats[i]) {
+				this.format = formats[i];
+				this.fetchPromises.clear();
+			}
+			this.prefetch();
+			try {
+				await Promise.all(
+					STEM_NAMES.map(async (name) => {
+						const data = await this.fetchPromises.get(name)!;
+						this.buffers.set(name, await ctx.decodeAudioData(data));
+					}),
+				);
+				break;
+			} catch (err) {
+				if (i === formats.length - 1) throw err;
+				console.warn(`Stem format "${formats[i]}" failed, trying "${formats[i + 1]}":`, err);
+				this.buffers.clear();
+			}
+		}
+
 		const inst = this.buffers.get("inst")!;
 		this.loopDuration = inst.duration;
 		// Phase-lock the bar grid to the actual loop length so the grid
@@ -93,9 +145,16 @@ export class AudioEngine {
 		this.masterGain = ctx.createGain();
 		this.masterGain.gain.value = this.muted ? 0 : 1;
 		this.masterGain.connect(ctx.destination);
+		// stem gains -> mixBus (entrance gain) -> lowpass -> master
+		this.filter = ctx.createBiquadFilter();
+		this.filter.type = "lowpass";
+		this.filter.Q.value = 0.7;
+		this.filter.connect(this.masterGain);
+		this.mixBus = ctx.createGain();
+		this.mixBus.connect(this.filter);
 		for (const name of STEM_NAMES) {
 			const gain = ctx.createGain();
-			gain.connect(this.masterGain);
+			gain.connect(this.mixBus);
 			this.gains.set(name, gain);
 		}
 	}
@@ -126,6 +185,9 @@ export class AudioEngine {
 		if (!this.masterGain) this.buildGraph();
 
 		const startAt = this.ctx!.currentTime + 0.08;
+		// Tension: muffled lowpass + reduced gain on the whole mix bus.
+		this.filter!.frequency.setValueAtTime(album.audio.entranceLowpassHz, startAt);
+		this.mixBus!.gain.setValueAtTime(album.audio.entranceGain, startAt);
 		this.startSources(startAt, { inst: 1, bass: 0, pluck: 0 });
 
 		const buildAt = startAt + album.audio.buildStartBar * this.secondsPerBar;
@@ -135,6 +197,14 @@ export class AudioEngine {
 			gain.setValueAtTime(0, buildAt);
 			gain.linearRampToValueAtTime(1, buildEnd);
 		}
+		// Release: the filter opens and full gain returns over a longer,
+		// slower ramp than the stem fade-in, so the brightness blooms
+		// gradually after the arrangement arrives.
+		const releaseEnd = buildAt + album.audio.releaseRampBars * this.secondsPerBar;
+		this.filter!.frequency.setValueAtTime(album.audio.entranceLowpassHz, buildAt);
+		this.filter!.frequency.exponentialRampToValueAtTime(19000, releaseEnd);
+		this.mixBus!.gain.setValueAtTime(album.audio.entranceGain, buildAt);
+		this.mixBus!.gain.linearRampToValueAtTime(1, releaseEnd);
 		return { startAt, buildAt };
 	}
 
@@ -145,6 +215,8 @@ export class AudioEngine {
 		if (!this.masterGain) this.buildGraph();
 
 		const startAt = this.ctx!.currentTime + 0.08;
+		this.filter!.frequency.setValueAtTime(19000, startAt);
+		this.mixBus!.gain.setValueAtTime(1, startAt);
 		this.startSources(startAt, { inst: 1, bass: 1, pluck: 1 });
 		return startAt;
 	}

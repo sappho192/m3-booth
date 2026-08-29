@@ -6,10 +6,10 @@ import { album } from "../config/album";
 	<h2>Tracklist</h2>
 	<ol class="tracklist">
 		{
-			album.tracks.map((track) => (
+			album.tracks.map((title, i) => (
 				<li>
-					<span>{track.title}</span>
-					<span class="tracklist__note">{track.note}</span>
+					<span class="tracklist__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+					<span>{title}</span>
 				</li>
 			))
 		}

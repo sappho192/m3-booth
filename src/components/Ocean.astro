@@ -1,14 +1,20 @@
 ---
-/** The single persistent scene: sunset sky, horizon, sea, wind, grain. */
+/**
+ * The single persistent scene: sunset sky, horizon, sea, wind, grain.
+ * Each layer sits in a fade wrapper so the entrance can reveal them
+ * one by one over the black first screen.
+ */
 ---
 
 <div class="ocean" aria-hidden="true">
-	<div class="ocean__sky"></div>
-	<div class="ocean__sea"></div>
-	<div class="ocean__horizon"></div>
-	<div class="ocean__shimmer"></div>
-	<div class="ocean__wind"></div>
-	<div class="ocean__wind ocean__wind--b"></div>
-	<div class="ocean__grain"></div>
+	<div class="ocean__layer ocean__layer--sky"><div class="ocean__sky"></div></div>
+	<div class="ocean__layer ocean__layer--sea"><div class="ocean__sea"></div></div>
+	<div class="ocean__layer ocean__layer--horizon"><div class="ocean__horizon"></div></div>
+	<div class="ocean__layer ocean__layer--shimmer"><div class="ocean__shimmer"></div></div>
+	<div class="ocean__layer ocean__layer--wind">
+		<div class="ocean__wind"></div>
+		<div class="ocean__wind ocean__wind--b"></div>
+	</div>
+	<div class="ocean__layer ocean__layer--grain"><div class="ocean__grain"></div></div>
 </div>
 <div class="scrim" aria-hidden="true"></div>
