@@ -66,7 +66,7 @@ body[data-state="entrance-playing"] .ocean__layer--grain {
 
 .ocean__sky {
 	position: absolute;
-	inset: 0 0 45% 0;
+	inset: 0 0 calc(100% - var(--horizon-y, 55%)) 0;
 	background: linear-gradient(
 		180deg,
 		#f3c298 0%,
@@ -103,7 +103,7 @@ body[data-state="entrance-playing"] .ocean__layer--grain {
 
 .ocean__sea {
 	position: absolute;
-	inset: 55% 0 0 0;
+	inset: var(--horizon-y, 55%) 0 0 0;
 	background: linear-gradient(
 		180deg,
 		var(--dusk-violet) 0%,
@@ -162,7 +162,7 @@ body[data-state="entrance-playing"] .ocean__layer--grain {
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 55%;
+	top: var(--horizon-y, 55%);
 	height: 1px;
 	background: linear-gradient(
 		90deg,
@@ -179,7 +179,7 @@ body[data-state="entrance-playing"] .ocean__layer--grain {
 	position: absolute;
 	left: 10%;
 	right: 10%;
-	top: calc(55% - 1px);
+	top: calc(var(--horizon-y, 55%) - 1px);
 	height: clamp(40px, 9vh, 90px);
 	background: linear-gradient(
 		180deg,

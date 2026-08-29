@@ -3,8 +3,8 @@
  * Replace values as soon as real content is confirmed.
  */
 export const album = {
-	artist: "Sappho Sound",
-	title: "[To be disclosed]",
+	artist: "Sappho",
+	title: "[TBD]",
 	subtitle: "",
 	event: "M3 2026 Autumn",
 	date: "2026-10-25",
@@ -54,8 +54,8 @@ export const album = {
 	},
 
 	concept: [
-		"노을 지는 바다를 바라보고 있는데, 이따금씩 바람이 불어오는 순간.",
-		"Emotional progressive house — a short walk from the entrance into the sound.",
+		"[曲のコンセプトを書く]",
+		"[A short walk from the entrance into the sound]",
 	],
 
 	tracks: [

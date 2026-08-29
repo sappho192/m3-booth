@@ -29,6 +29,9 @@ class EntranceController {
 	init(): void {
 		document.body.classList.add("scroll-locked");
 		this.setTimingVariables();
+		this.alignHorizon();
+		window.addEventListener("resize", () => this.alignHorizon());
+		void document.fonts.ready.then(() => this.alignHorizon());
 		this.els.soundBtn.addEventListener("click", () => void this.enterWithSound());
 		this.els.silentBtn.addEventListener("click", () => this.enterSilently());
 		this.els.audioControl.addEventListener("click", () => void this.toggleAudio());
@@ -51,6 +54,20 @@ class EntranceController {
 		// The visual release lasts exactly as long as the audio build, so
 		// the fade-in and the Hero completion read as one event.
 		root.setProperty("--release-s", `${(bar * album.audio.buildBars).toFixed(3)}s`);
+	}
+
+	/**
+	 * Place the horizon line exactly in the gap between the two entrance
+	 * buttons, so the scene's key line crosses calm space instead of
+	 * colliding with the button outline.
+	 */
+	private alignHorizon(): void {
+		const sound = this.els.soundBtn.getBoundingClientRect();
+		const silent = this.els.silentBtn.getBoundingClientRect();
+		if (sound.height === 0 || silent.height === 0) return;
+		const midY = (sound.bottom + silent.top) / 2;
+		const pct = (midY / window.innerHeight) * 100;
+		document.documentElement.style.setProperty("--horizon-y", `${pct.toFixed(2)}%`);
 	}
 
 	private setState(next: ExperienceState): void {
