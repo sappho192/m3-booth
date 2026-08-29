@@ -80,8 +80,9 @@ export const album = {
 		{ role: "Composition", name: "Sappho" },
 		{ role: "Arrangement", name: "Sappho" },
 		{ role: "Vocal", name: "まより" },
+		{ role: "Lyrics", name: "紅葉月城" },
 		{ role: "Illustration", name: "[To be disclosed]" },
-		{ role: "Special thanks to", name: "紅葉月城、Avery Berman" },
+		{ role: "Special thanks to", name: "Avery Berman" },
 	],
 
 	/** Only confirmed links are rendered. */
