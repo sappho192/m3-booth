@@ -54,17 +54,19 @@ export const album = {
 	},
 
 	concept: [
-		"[曲のコンセプトを書く]",
-		"[A short walk from the entrance into the sound]",
+		"We were never meant to stay, but something always does.",
 	],
 
 	tracks: [
+		"Sappho feat. まより - [To be disclosed] (Intro Ver.)",
 		"Sappho - Metropolitan Hills",
 		"Sappho feat. まより - [To be disclosed]",
-		"Sappho - [To be disclosed]",
-		"Sappho - [To be disclosed]",
-		"Sappho - [To be disclosed]",
-		"Sappho - [To be disclosed]",
+		"Sappho - A Legacy Of Stars",
+		"Sappho - Starry Night",
+		"Sappho - Frosy Memories",
+		"Sappho - [Remix from to be disclosed]",
+		"Sappho feat. まより - [To be disclosed] (Outro Ver.)",
+		"Sappho feat. まより - [To be disclosed] (Unmastered Inst.)",
 	],
 
 	eventInfo: {
@@ -79,6 +81,7 @@ export const album = {
 	credits: [
 		{ role: "Composition", name: "Sappho" },
 		{ role: "Arrangement", name: "Sappho" },
+		{ role: "Remix", name: "[To be disclosed]" },
 		{ role: "Vocal", name: "まより" },
 		{ role: "Lyrics", name: "紅葉月城" },
 		{ role: "Illustration", name: "[To be disclosed]" },

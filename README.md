@@ -12,17 +12,21 @@ For details, please visit https://m3.sapphosound.com/
 - Format: CD
 - Price: [To be disclosed]
 - Album tracklist:
-  - 01. Sappho - Metropolitan Hills
-  - 02. Sappho feat. まより - [To be disclosed]
-  - 03. Sappho - [To be disclosed]
-  - 04. Sappho - [To be disclosed]
-  - 05. Sappho - [To be disclosed]
-  - 06. Sappho - [To be disclosed]
+  - 01. Sappho feat. まより - [To be disclosed] (Intro Ver.)
+  - 02. Sappho - Metropolitan Hills
+  - 03. Sappho feat. まより - [To be disclosed]
+  - 04. Sappho - A Legacy Of Stars
+  - 05. Sappho - Starry Night
+  - 06. Sappho - Frosy Memories
+  - 07. Sappho - [Remix from to be disclosed]
+  - 08. Sappho feat. まより - [To be disclosed] (Outro Ver.)
+  - 09. Sappho feat. まより - [To be disclosed] (Unmastered Inst.)
 
 ## Credits
 
 - Composition: Sappho
 - Arrangement: Sappho
+- Remix: [To be disclosed]
 - Vocal: まより
 - Lyrics: 紅葉月城
 - Illustration: [To be disclosed]
