@@ -14,4 +14,7 @@ import { album } from "../config/album";
 		</button>
 		<p class="entrance__status" id="entrance-status" role="status" aria-live="polite"></p>
 	</div>
+	<div class="entrance__message" id="entrance-message" aria-hidden="true">
+		{album.concept.map((line) => <p>{line}</p>)}
+	</div>
 </div>

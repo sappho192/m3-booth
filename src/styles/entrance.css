@@ -32,6 +32,55 @@
 	text-indent: 0.5em; /* optically re-center letterspaced text */
 }
 
+/* Sound entry: brand/tagline dissolve slowly (until just before bar 3),
+ * the buttons leave quickly. Durations are set from the bar grid. */
+.entrance__brand,
+.entrance__tagline {
+	transition: opacity var(--intro-fade-s, 2.5s) ease;
+}
+
+.entrance__actions {
+	transition: opacity 0.35s ease;
+}
+
+body[data-state="entrance-playing"] .entrance__brand,
+body[data-state="entrance-playing"] .entrance__tagline {
+	opacity: 0;
+}
+
+body[data-state="entrance-playing"] .entrance__actions,
+body[data-state="entering"] .entrance__actions,
+body[data-state="main"] .entrance__actions {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Concept message: shown only during the entrance, bars 3 to ~5. */
+.entrance__message {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: min(30rem, 85vw);
+	text-align: center;
+	font-size: 0.85rem;
+	line-height: 2.1;
+	color: var(--ink-dim);
+	opacity: 0;
+	/* fade-out is deliberately slower than fade-in */
+	transition: opacity calc(var(--bar-s, 1.95s) * 1.2) ease;
+	pointer-events: none;
+}
+
+.entrance__message.is-visible {
+	opacity: 1;
+	transition-duration: calc(var(--bar-s, 1.95s) * 0.6);
+}
+
+.entrance__message p + p {
+	margin-top: 1em;
+}
+
 .entrance__tagline {
 	font-size: 0.7rem;
 	letter-spacing: var(--tracking-label);
@@ -156,12 +205,22 @@ body[data-state="entering"] .reveal {
 .hero__scroll {
 	position: absolute;
 	bottom: 2.25rem;
-	left: 50%;
-	transform: translateX(-50%);
+	/* Center without transform: .reveal animates translateY on the same
+	 * element, and a translateX here would be overridden by specificity. */
+	left: 0;
+	right: 0;
+	margin-inline: auto;
+	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 0.6rem;
+}
+
+/* Trailing letter-spacing makes uppercase labels optically off-center;
+ * compensate with matching left padding. */
+.hero__scroll .label {
+	padding-left: var(--tracking-label);
 }
 
 .hero__scroll-line {

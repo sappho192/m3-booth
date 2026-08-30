@@ -20,6 +20,7 @@ Handoff spec: `docs/M3_2026_Autumn_Album_Promotion_Site_Handoff_v0.2.md`.
 - `src/config/album.ts` — all site content/audio config (BPM, entrance bars, tracklist, credits, links). Edit content here, not in components.
 - `src/scripts/audio-engine.ts` — AudioContext, stem buffers, bar/beat grid. Never touches the DOM. All stems start on one timestamp and loop together; entrance plays `inst` alone through a lowpass (`entranceLowpassHz`) at reduced gain (`entranceGain`), then from `buildStartBar` over `buildBars` the bass/pluck ramp in while the filter opens and full gain returns (once — later loop passes stay full mix).
 - First screen is near-black; during `entrance-playing` each ocean layer fades in on a bar-locked stagger (`--bar-s` in `src/styles/ocean.css`). Silent entry skips the stagger.
+- Entrance text choreography: brand/tagline dissolve slowly over ~2.8 bars (`--intro-fade-s`), buttons fade fast; the concept message (`album.concept`) appears at bar 2.5 (0.6-bar fade-in) and fades out slowly from bar 5.8 (1.2-bar fade-out, gone by ~bar 7). The concept is shown ONLY here — it is not a main-page section.
 - `src/scripts/entrance-controller.ts` — state machine (idle → loading-audio → entrance-playing → entering → main / silent), schedules visual release against the AudioContext clock.
 - `src/styles/ocean.css` — the single persistent scene (sky/horizon/sea/wind/grain). States via `body[data-state]`; sections never replace the scene.
 

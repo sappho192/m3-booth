@@ -23,6 +23,7 @@ class EntranceController {
 		soundBtn: document.querySelector<HTMLButtonElement>("#enter-sound")!,
 		silentBtn: document.querySelector<HTMLButtonElement>("#enter-silent")!,
 		status: document.querySelector<HTMLElement>("#entrance-status")!,
+		message: document.querySelector<HTMLElement>("#entrance-message")!,
 		audioControl: document.querySelector<HTMLButtonElement>("#audio-control")!,
 	};
 
@@ -50,6 +51,8 @@ class EntranceController {
 		const bar = (60 / album.bpm) * album.beatsPerBar;
 		const root = document.documentElement.style;
 		root.setProperty("--bar-s", `${bar.toFixed(3)}s`);
+		// Brand/tagline dissolve length: gone just before bar 3.
+		root.setProperty("--intro-fade-s", `${(bar * 2.8).toFixed(3)}s`);
 		root.setProperty("--pulse-s", `${(bar * album.visualPulseBars).toFixed(3)}s`);
 		// The visual release lasts exactly as long as the audio build, so
 		// the fade-in and the Hero completion read as one event.
@@ -83,15 +86,37 @@ class EntranceController {
 		this.els.status.textContent = "LOADING SOUND...";
 
 		try {
-			const { buildAt } = await audioEngine.startEntrance();
+			const { startAt, buildAt } = await audioEngine.startEntrance();
 			this.setState("entrance-playing");
 			this.els.status.textContent = "";
+			this.scheduleMessage(startAt);
 			this.scheduleRelease(buildAt);
 		} catch (err) {
 			// Audio failure must never block the site (§16).
 			console.warn("Audio unavailable, entering silently:", err);
 			this.enterSilently();
 		}
+	}
+
+	/**
+	 * Entrance text choreography, locked to the bar grid:
+	 * - brand/tagline dissolve slowly, gone just before bar 3
+	 *   (buttons fade fast via CSS on state change)
+	 * - the concept message appears at bar 2.5 and is gone by ~bar 6.4,
+	 *   handing off to the ocean staging and the bar-8 build
+	 */
+	private scheduleMessage(startAt: number): void {
+		const bar = audioEngine.secondsPerBar;
+		const showAt = startAt + bar * 2.5;
+		const hideAt = startAt + bar * 5.8; // slow fade-out completes ≈ bar 7
+		setTimeout(() => {
+			this.els.message.classList.add("is-visible");
+			this.els.message.setAttribute("aria-hidden", "false");
+		}, Math.max(0, audioEngine.timeUntil(showAt) * 1000));
+		setTimeout(() => {
+			this.els.message.classList.remove("is-visible");
+			this.els.message.setAttribute("aria-hidden", "true");
+		}, Math.max(0, audioEngine.timeUntil(hideAt) * 1000));
 	}
 
 	/**
