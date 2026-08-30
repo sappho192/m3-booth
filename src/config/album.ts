@@ -55,6 +55,7 @@ export const album = {
 
 	concept: [
 		"We were never meant to stay, but something always does.",
+		"時が経っても、あなたの中に残り続けるものは何ですか。",
 	],
 
 	tracks: [
