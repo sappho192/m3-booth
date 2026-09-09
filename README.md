@@ -17,7 +17,7 @@ For details, please visit https://m3.sapphosound.com/
   - 03. Sappho feat. まより - Ephemeris
   - 04. Sappho - A Legacy Of Stars
   - 05. Sappho - Starry Night
-  - 06. Sappho - Frosy Memories
+  - 06. Sappho - Frosty Memories
   - 07. Sappho - [Remix from to be disclosed]
   - 08. Sappho - [Remix from to be disclosed]
   - 09. Sappho feat. まより - Ephemeris (Outro Ver.)
