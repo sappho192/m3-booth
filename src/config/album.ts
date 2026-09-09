@@ -4,7 +4,7 @@
  */
 export const album = {
 	artist: "Sappho",
-	title: "Ephemeris",
+	title: "[TBD]",
 	subtitle: "",
 	event: "M3 2026 Autumn",
 	date: "2026-10-25",

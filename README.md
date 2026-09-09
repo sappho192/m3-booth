@@ -6,7 +6,7 @@ For details, please visit https://m3.sapphosound.com/
 
 ## Album details
 
-- Album title: Ephemeris
+- Album title: [TBD]
 - Album artist: Sappho
 - Album release date: 2026-10-25
 - Format: CD
