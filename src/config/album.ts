@@ -4,7 +4,7 @@
  */
 export const album = {
 	artist: "Sappho",
-	title: "[TBD]",
+	title: "Ephemeris",
 	subtitle: "",
 	event: "M3 2026 Autumn",
 	date: "2026-10-25",
@@ -59,15 +59,16 @@ export const album = {
 	],
 
 	tracks: [
-		"Sappho feat. まより - [To be disclosed] (Intro Ver.)",
+		"Sappho feat. まより - Ephemeris (Intro Ver.)",
 		"Sappho - Metropolitan Hills",
-		"Sappho feat. まより - [To be disclosed]",
+		"Sappho feat. まより - Ephemeris",
 		"Sappho - A Legacy Of Stars",
 		"Sappho - Starry Night",
 		"Sappho - Frosy Memories",
 		"Sappho - [Remix from to be disclosed]",
-		"Sappho feat. まより - [To be disclosed] (Outro Ver.)",
-		"Sappho feat. まより - [To be disclosed] (Unmastered Inst.)",
+		"Sappho - [Remix from to be disclosed]",
+		"Sappho feat. まより - Ephemeris (Outro Ver.)",
+		"Sappho feat. まより - Ephemeris (Unmastered Inst.)",
 	],
 
 	eventInfo: {
@@ -82,7 +83,7 @@ export const album = {
 	credits: [
 		{ role: "Composition", name: "Sappho" },
 		{ role: "Arrangement", name: "Sappho" },
-		{ role: "Remix", name: "[To be disclosed]" },
+		{ role: "Remix", name: "Phenom, BLACKNYAO" },
 		{ role: "Vocal", name: "まより" },
 		{ role: "Lyrics", name: "紅葉月城" },
 		{ role: "Illustration", name: "[To be disclosed]" },
