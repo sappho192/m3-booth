@@ -64,7 +64,7 @@ export const album = {
 		"Sappho feat. まより - Ephemeris",
 		"Sappho - A Legacy Of Stars",
 		"Sappho - Starry Night",
-		"Sappho - Frosy Memories",
+		"Sappho - Frosty Memories",
 		"Sappho - [Remix from to be disclosed]",
 		"Sappho - [Remix from to be disclosed]",
 		"Sappho feat. まより - Ephemeris (Outro Ver.)",
