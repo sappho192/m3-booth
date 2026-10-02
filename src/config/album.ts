@@ -88,7 +88,7 @@ export const album = {
 		{ role: "Remix", name: "Phenom, BLACKNYAO" },
 		{ role: "Vocal", name: "まより" },
 		{ role: "Lyrics", name: "紅葉月城" },
-		{ role: "Illustration", name: "[To be disclosed]" },
+		{ role: "Illustration", name: "MIU" },
 		{ role: "Special thanks to", name: "Avery Berman" },
 	],
 

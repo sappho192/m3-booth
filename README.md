@@ -32,7 +32,7 @@ For details, please visit https://m3.sapphosound.com/
 - Remix: Phenom, BLACKNYAO
 - Vocal: まより
 - Lyrics: 紅葉月城
-- Illustration: [To be disclosed]
+- Illustration: MIU
 - Special thanks to: Avery Berman
 
 ## Access
