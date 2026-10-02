@@ -64,11 +64,13 @@ export const album = {
 		"Sappho feat. まより - Ephemeris",
 		"Sappho - A Legacy Of Stars",
 		"Sappho - Starry Night",
-		"Sappho - Frosty Memories",
-		"Sappho - [Remix from to be disclosed]",
-		"Sappho - [Remix from to be disclosed]",
+		"Sappho - Frosy Memories",
+		"Sappho - The Glare of the Past",
 		"Sappho feat. まより - Ephemeris (Outro Ver.)",
-		"Sappho feat. まより - Ephemeris (Unmastered Inst.)",
+		"Sappho - [Remix from to be disclosed]",
+		"Sappho - [Remix from to be disclosed]",
+		"Sappho - Unfiltered Emotions",
+		"Sappho feat. まより - Ephemeris (Instrumental)",
 	],
 
 	eventInfo: {
