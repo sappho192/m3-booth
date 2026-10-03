@@ -4,7 +4,7 @@
  */
 export const album = {
 	artist: "Sappho",
-	title: "[TBD]",
+	title: "Meridia",
 	subtitle: "",
 	event: "M3 2026 Autumn",
 	date: "2026-10-25",
@@ -59,18 +59,20 @@ export const album = {
 	],
 
 	tracks: [
-		"Sappho feat. まより - Ephemeris (Intro Ver.)",
+		"Sappho - Calling of Ephemeris",
 		"Sappho - Metropolitan Hills",
 		"Sappho feat. まより - Ephemeris",
 		"Sappho - A Legacy Of Stars",
 		"Sappho - Starry Night",
 		"Sappho - Frosy Memories",
 		"Sappho - The Glare of the Past",
-		"Sappho feat. まより - Ephemeris (Outro Ver.)",
-		"Sappho - [Remix from to be disclosed]",
-		"Sappho - [Remix from to be disclosed]",
-		"Sappho - Unfiltered Emotions",
+		"Sappho feat. まより - Reflections of Ephemeris",
 		"Sappho feat. まより - Ephemeris (Instrumental)",
+		"Sappho - Remaining Affections (Radio Edit)",
+		"Sappho - Unfiltered Emotions",
+		"BLACKNYAO feat. Sappho - Starry, Frosty Night",
+		"Sappho - Cobalt Sky (Radio Edit)",
+		"Sappho - Starry Night (Phenom Remix)",
 	],
 
 	eventInfo: {

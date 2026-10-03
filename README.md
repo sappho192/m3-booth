@@ -6,24 +6,26 @@ For details, please visit https://m3.sapphosound.com/
 
 ## Album details
 
-- Album title: [TBD]
+- Album title: Meridia
 - Album artist: Sappho
 - Album release date: 2026-10-25
 - Format: CD
 - Price: [To be disclosed]
 - Album tracklist:
-  - 01. Sappho feat. まより - Ephemeris (Intro Ver.)
+  - 01. Sappho - Calling of Ephemeris
   - 02. Sappho - Metropolitan Hills
   - 03. Sappho feat. まより - Ephemeris
   - 04. Sappho - A Legacy Of Stars
   - 05. Sappho - Starry Night
   - 06. Sappho - Frosy Memories
   - 07. Sappho - The Glare Of The Past
-  - 08. Sappho feat. まより - Ephemeris (Outro Ver.)
-  - 09. Sappho - [Remix from to be disclosed]
-  - 10. Sappho - [Remix from to be disclosed]
+  - 08. Sappho feat. まより - Reflections of Ephemeris
+  - 09. Sappho feat. まより - Ephemeris (Instrumental)
+  - 10. Sappho - Remaining Affections (Radio Edit)
   - 11. Sappho - Unfiltered Emotions
-  - 12. Sappho feat. まより - Ephemeris (Instrumental)
+  - 12. BLACKNYAO feat. Sappho - Starry, Frosty Night
+  - 13. Sappho - Cobalt Sky (Radio Edit)
+  - 14. Sappho - Starry Night (Phenom Remix)
 
 ## Credits
 
